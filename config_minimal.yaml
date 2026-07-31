@@ -1,0 +1,209 @@
+# ═══════════════════════════════════════════════════════════════
+# THE INSTITUTION — MINIMAL CONFIGURATION (Phase 1)
+# Only 3 streams: Content Sites, Digital Products, Newsletter
+# Designed for quick, reliable startup with zero API keys
+# ═══════════════════════════════════════════════════════════════
+
+institution:
+  name: "The Institution"
+  version: "1.0.0"
+  founded: "2026-07-31"
+  founder: "Mike D"
+  timezone: "Australia/Adelaide"
+  currency: "AUD"
+  tax_reserve_percent: 30
+
+paths:
+  root: "/opt/institution"
+  data: "/opt/institution/data"
+  db: "/opt/institution/data/db/institution.db"
+  logs: "/opt/institution/logs"
+
+# ═══════════════════════════════════════════════════════════════
+# AI PROVIDERS - All optional, system works with zero keys
+# Priority order: offline template > ollama > groq > gemini > others
+ai:
+  default_quality_tier: "routine"
+  cache_ttl_hours: 168
+  max_retries: 3
+  timeout_seconds: 60
+
+  providers:
+    offline:
+      enabled: true
+      priority: 1
+      max_tokens: 2048
+
+    ollama:
+      enabled: true
+      priority: 2
+      base_url: "http://localhost:11434"
+      models:
+        critical: "llama3.1:8b"
+        routine: "llama3.1:8b"
+      rpm_limit: 999
+      rpd_limit: 999999
+
+    groq:
+      enabled: false  # Set to true and add GROQ_API_KEY to .env.simple
+      priority: 3
+      models:
+        critical: "llama-3.3-70b-versatile"
+        routine: "llama-3.1-8b-instant"
+      rpm_limit: 30
+      rpd_limit: 14400
+
+    gemini:
+      enabled: false  # Set to true and add GEMINI_API_KEY to .env.simple
+      priority: 4
+      models:
+        critical: "gemini-2.0-flash"
+        routine: "gemini-2.0-flash"
+      rpm_limit: 15
+      rpd_limit: 1500
+
+# ═══════════════════════════════════════════════════════════════
+# PHASE 1: Only 3 streams enabled (simplest, no external dependencies)
+streams:
+  # STREAM 1: SEO Content Sites (easiest - static files, no API needed)
+  content_sites:
+    enabled: true
+    autonomy_level: 3
+    schedule:
+      articles_per_day: 2
+      publish_hour: 8
+    sites:
+      - name: "Budget Tech Australia"
+        slug: "budget-tech-au"
+        niche: "budget technology australia"
+        monetization: []  # Add Amazon Associates later
+        categories:
+          - "budget laptops"
+          - "free software"
+          - "refurbished tech"
+        seed_keywords:
+          - "best budget laptop australia 2026"
+          - "free alternatives to adobe photoshop"
+          - "refurbished vs new laptop"
+          - "raspberry pi projects for beginners"
+          - "linux for beginners guide"
+    content:
+      min_word_count: 1200
+      max_word_count: 2500
+      internal_links_per_article: 3
+      bootstrap_articles: 10
+      json_ld: true
+      sitemap: true
+      rss: true
+
+  # STREAM 2: Digital Products (offline generation, no API needed)
+  digital_products:
+    enabled: true
+    autonomy_level: 2
+    schedule:
+      products_per_week: 3
+      creation_day: "tuesday"
+    platforms: []  # Add Etsy/Gumroad later
+    product_types:
+      - type: "planner"
+        pages: 8
+        price_range: [3.99, 7.99]
+        niches: ["productivity", "health tracking", "budget"]
+      - type: "worksheet"
+        pages: 4
+        price_range: [1.99, 3.99]
+        niches: ["goal setting", "habit tracking"]
+      - type: "checklist"
+        pages: 2
+        price_range: [0.99, 1.99]
+        niches: ["moving", "travel", "emergency prep"]
+    output_formats: ["pdf"]
+    min_substantive_content_percent: 80
+
+  # STREAM 3: Newsletter (local only, no API needed for Phase 1)
+  newsletter:
+    enabled: true
+    autonomy_level: 2
+    schedule:
+      frequency: "weekly"
+      send_day: "thursday"
+      send_hour: 10
+    platform: "local"  # Change to buttondown later
+    sections:
+      - "curated_links"
+      - "original_insight"
+      - "product_spotlight"
+    monetization:
+      sponsorship_threshold_subs: 1000
+      affiliate_links: false
+
+  # Phase 2 streams (disabled for now)
+  video_content:
+    enabled: false
+  grants:
+    enabled: false
+  freelance:
+    enabled: false
+  print_on_demand:
+    enabled: false
+  affiliate_sites:
+    enabled: false
+  social_media:
+    enabled: false
+  micro_saas:
+    enabled: false
+  stock_content:
+    enabled: false
+
+# ═══════════════════════════════════════════════════════════════
+# META-AGENT - Simplified for Phase 1
+meta_agent:
+  loop_interval_seconds: 300
+  health_check_interval_seconds: 60
+  resource_allocation:
+    strategy: "equal"  # Simple equal distribution for Phase 1
+  autonomy_ladder:
+    L0: "Manual"
+    L1: "Assisted"
+    L2: "Recommended"
+    L3: "Conditional auto"
+    L4: "Supervised auto"
+    L5: "Full auto (BANNED)"
+
+# ═══════════════════════════════════════════════════════════════
+# HUMAN ENERGY ADAPTATION
+human_interface:
+  checkin_method: "dashboard"
+  one_action_rule: true
+  max_tasks_per_day:
+    energy_1: 0
+    energy_2: 1
+    energy_3: 2
+    energy_4: 3
+    energy_5: 4
+  maintenance_mode_threshold_days: 3
+  guilt_free_messaging: true
+
+# ═══════════════════════════════════════════════════════════════
+# DASHBOARD
+dashboard:
+  host: "0.0.0.0"
+  port: 8080
+  auto_refresh_seconds: 60
+  theme: "dark"
+  mobile_responsive: true
+  external_cdn: false
+
+# ═══════════════════════════════════════════════════════════════
+# SAFETY & MONITORING
+safety:
+  metrics_interval_seconds: 60
+  alert_thresholds:
+    cpu_percent: 90
+    ram_percent: 85
+    disk_percent: 90
+  auto_restart:
+    max_restarts_per_hour: 3
+  backup:
+    frequency: "daily"
+    retention_days: 7
