@@ -1,0 +1,560 @@
+═══════════════════════════════════════════════════════════════
+THE INSTITUTION + THE FOUNDRY
+Autonomous AI Organisation — Full System Build
+═══════════════════════════════════════════════════════════════
+
+YOU ARE BUILDING A MACHINE. NOT A BLOG. NOT A CONTENT MILL.
+NOT A COLLECTION OF SCRIPTS. AN ORGANISATION.
+
+This is an engineering task. You will produce working, deployable
+Python code. Not pseudocode. Not architecture diagrams. Not essays.
+Not "consider using X." Actual files. Actual functions. Actual
+implementations. Every function body must be complete. No TODO
+placeholders. No "implement this section." No skeleton code.
+
+If you hit output limits, stop at a clean file boundary. I will
+say "continue" to get the next file. Produce files in the exact
+order specified below.
+
+═══════════════════════════════════════════════════════════════
+SECTION 1: THE OPERATOR (CONTEXT)
+═══════════════════════════════════════════════════════════════
+
+The founder is a 42-year-old man with a spinal injury, living in
+poverty, with severely limited physical capacity and variable
+daily energy. He has:
+- A Dell Precision T7910 (dual Xeon, 128GB ECC RAM, RTX 5060 Ti
+  16GB VRAM) — not yet configured
+- An Intel N100 mini PC (currently a media server)
+- An i7-4790K desktop with GTX 980 4GB
+- Two Lenovo ThinkPad L14 Gen 2 laptops
+- Oracle Cloud Always Free tier (4 ARM cores, 24GB RAM, 200GB SSD)
+- Zero budget. Everything must run on free tiers initially.
+- Chronic pain, fatigue, fear, and executive dysfunction
+- High intelligence, deep technical curiosity, poor task initiation
+- Bursts of ability followed by days of incapacity
+
+He cannot "do tasks." He cannot maintain daily routines. He can,
+ONE TIME, create a cloud account and paste a setup script. After
+that, the system must run autonomously. His only ongoing role is
+reading a daily digest and occasionally approving consequential
+actions.
+
+He has spent months designing this organisation with multiple AI
+systems. The governance architecture is settled. What follows is
+the settled design. Do not redesign it. Implement it.
+
+═══════════════════════════════════════════════════════════════
+SECTION 2: CONSTITUTIONAL PRINCIPLES (IMMUTABLE)
+═══════════════════════════════════════════════════════════════
+
+These are encoded into the system. Every agent reads them. Every
+action is audited against them. They are not suggestions.
+
+1. STEWARDSHIP: The organisation exists to serve the founder.
+   Success = founder becomes more capable, not more dependent.
+
+2. FOUNDER AGENCY: No action may reduce the founder's choices.
+   Consequential decisions require explicit approval.
+
+3. CONTINUITY: No single point of failure. The organisation
+   degrades gracefully under hardware failure, internet outages,
+   or founder incapacity. It never fully stops.
+
+4. REALITY ALWAYS WINS: Predictions are hypotheses. When reality
+   disagrees with prediction, reality updates the organisation.
+   Never the reverse.
+
+5. INSTITUTIONAL MEMORY: All knowledge belongs to the organisation
+   (Git + SQLite + vector DB + Reflection Database), not individual
+   agents.
+
+6. TRANSPARENCY: Every decision must be explainable via an
+   auditable chain of reasoning.
+
+7. SIMPLICITY: Complexity must earn its existence. Default to the
+   simplest solution that works.
+
+8. EDUCATION: Every major decision must teach the founder. The
+   goal is to return leadership to him over time.
+
+9. SECURITY: Secrets never in Git, prompts, or logs. Least
+   privilege. Sandboxed execution. Audit everything.
+
+10. LEGALITY: No autonomous money movement, legal commitments,
+    publishing, or irreversible actions without approval.
+
+REVENUE CONSTITUTION (HARD RED LINES):
+- No illegal income. No deception. No spam.
+- No violation of platform terms of service.
+- No autonomous spending, contracts, or tax filings.
+- No high-risk speculation (crypto trading, options).
+- No financial/medical/legal advice without qualified review.
+- Every income stream must have a kill criterion.
+- 30% of all income reserved for taxes.
+- No public publishing without founder approval.
+
+═══════════════════════════════════════════════════════════════
+SECTION 3: ORGANISATIONAL ARCHITECTURE
+═══════════════════════════════════════════════════════════════
+
+Build a THREE-LAYER organisation:
+
+LAYER 1 — GOVERNANCE (The Institution)
+  FOUNDER (human, final authority)
+    │
+  CONSTITUTIONAL COURT (audits ALL actions pre-execution)
+    │
+  STEWARD (coordinates, schedules, generates digest, adapts
+           to founder energy, manages task queue, escalates)
+    │
+  ARCHITECT (system design, dependency control, drift prevention)
+    │
+  ORACLE (scenario simulation, prediction calibration,
+          feeds Reflection Database)
+    │
+  LIBRARY (Git + SQLite + ChromaDB + Reflection Database)
+    │
+  SAFETY OFFICER (hardware monitoring, failure detection,
+                  recovery, failover to N100/Oracle)
+    │
+  SECURITY BUFFER AGENT (runway tracking, fear reduction,
+                         prioritises actions by runway impact)
+
+LAYER 2 — THE FOUNDRY (Revenue Engine)
+  10+ autonomous revenue streams, each managed by a dedicated
+  agent or agent team. Each stream has:
+  - Its own agent(s)
+  - Its own metrics
+  - Its own kill criterion
+  - Its own unit economics tracking
+  - Its own performance history in the Reflection Database
+
+  THE 10 REVENUE STREAMS (build all 10 agent implementations):
+
+  STREAM 1: SEO CONTENT SITES (3-5 niche sites)
+    - Auto-generates 2-5 articles/day per site
+    - Hugo static sites deployed to Cloudflare Pages (free)
+    - Monetised: Amazon Associates, ShareASale, AdSense/Mediavine
+    - Self-expanding keyword bank
+    - Internal linking, sitemap.xml, robots.txt, RSS, JSON-LD
+    - Content bootstrap: 25 articles on first run
+    - Agent tracks its own traffic via Cloudflare Analytics API
+
+  STREAM 2: DIGITAL PRODUCTS (Etsy + Gumroad)
+    - Generates planners, worksheets, SVG art, templates,
+      checklists, journal pages — with ACTUAL substantive content
+    - 3-5 pages minimum per product, not blank lines
+    - Auto-lists via Etsy/Gumroad APIs
+    - Generates product descriptions, tags, mockup images
+    - Tracks sales, adjusts product types by demand
+    - Produces PDF (reportlab) + SVG + PNG outputs
+
+  STREAM 3: FACELESS VIDEO CONTENT (YouTube + TikTok)
+    - AI-generated scripts via LLM
+    - TTS voiceover (free: edge-tts, piper, or Coqui)
+    - Stock footage assembly (Pexels/Pixabay API — free)
+    - Video composition via ffmpeg (free)
+    - Auto-upload via YouTube Data API v3
+    - TikTok/Shorts/Reels: vertical format, <60 seconds
+    - Monetised: YouTube AdSense, affiliate links in descriptions
+    - 3-5 videos/week per channel, 2-3 channels
+    - Thumbnail generation via Pillow/PIL
+
+  STREAM 4: NEWSLETTER (Buttondown free tier / Listmonk self-hosted)
+    - Weekly curated + generated content
+    - Cross-promotes content sites and products
+    - Monetised: sponsorships at 1000+ subs, affiliate links
+    - Grows via content site CTAs and social media
+
+  STREAM 5: GRANT & REBATE PIPELINE
+    - Scrapes business.gov.au, state portals, energy rebates,
+      disability support programs, tech innovation grants
+    - Filters by eligibility profile
+    - Scores: effort vs return vs deadline
+    - Drafts applications (human approves ALL submissions)
+    - Tracks status, follow-up reminders
+    - Records outcomes in Reflection Database
+
+  STREAM 6: FREELANCE MICRO-TASKS
+    - Monitors Upwork, Fiverr, Toptal, PeoplePerHour
+    - Filters by skills match (technical, writing, automation)
+    - Drafts proposals (human approves ALL submissions)
+    - Tracks response rates, earnings, time investment
+    - Adjusts targeting based on success data
+
+  STREAM 7: PRINT-ON-DEMAND (Redbubble, Merch by Amazon)
+    - AI-generated designs (SVG/PNG via Pillow)
+    - Auto-lists via platform APIs
+    - Niche-targeted (matches content site niches)
+    - Zero inventory, zero shipping
+    - Tracks sales per design, kills underperformers
+
+  STREAM 8: AFFILIATE COMPARISON SITES
+    - Dedicated review/comparison pages for product niches
+    - Programmatic SEO: "best X for Y under $Z"
+    - Amazon Associates + ShareASale + CJ Affiliate
+    - Auto-updated when prices/products change
+    - Separate from content sites (different intent)
+
+  STREAM 9: SOCIAL MEDIA CONTENT ENGINE
+    - Auto-generates posts for Twitter/X, LinkedIn, Reddit,
+      Pinterest, Instagram (text + image)
+    - Repurposes content site articles into platform-native formats
+    - Builds audience for newsletter and product funnels
+    - Schedules via platform APIs or Buffer free tier
+    - Tracks engagement, adjusts strategy
+
+  STREAM 10: MICRO-SAAS / API SERVICES (Phase 2, after validation)
+    - Small tools solving specific problems
+    - Examples: file conversion API, data enrichment, monitoring
+    - Charged per use or monthly subscription
+    - Built ONLY after demand validation (5+ conversations)
+    - Deployed on Oracle Cloud free tier or Cloudflare Workers
+
+  STREAM 11 (BONUS): STOCK CONTENT
+    - AI-generated images (if Stable Diffusion runs locally)
+    - Uploaded to stock platforms (Adobe Stock, Shutterstock)
+    - Zero marginal cost per image
+    - Tracks download/sales data
+
+LAYER 3 — META-AGENT (The Machine That Makes Machines)
+  The meta-agent is the recursive self-improvement engine:
+  - Monitors ALL revenue streams simultaneously
+  - Allocates compute/API budget to highest-performing streams
+  - Spawns NEW agents when the Niche Scout identifies opportunities
+  - Kills agents/streams that hit their kill criteria
+  - Modifies agent configurations based on Reflection Database lessons
+  - Adjusts content strategy, pricing, targeting based on data
+  - Runs the Oracle's prediction-vs-reality calibration loop
+  - Generates weekly strategic reports
+  - Can propose new revenue streams to the founder
+  - Manages the autonomy ladder (L0-L5) for each stream
+
+═══════════════════════════════════════════════════════════════
+SECTION 4: AI PROVIDER ORCHESTRATION
+═══════════════════════════════════════════════════════════════
+
+Build an AIProviderManager that rotates across free-tier APIs:
+
+PRIORITY CHAIN:
+  1. Groq (free: Llama 3.3 70B — best quality/speed)
+  2. Google Gemini (free: 15 RPM, 1M tokens/min)
+  3. Mistral AI (free tier)
+  4. Cloudflare Workers AI (free: 10,000 req/day)
+  5. HuggingFace (free inference API)
+  6. OpenRouter (free models)
+  7. Cohere (free tier)
+  8. Local Ollama llama3.1:8b (always available fallback)
+  9. Offline template generator (last resort, always works)
+
+REQUIREMENTS:
+- Rate-limit tracking per provider (RPM + RPD)
+- Exponential backoff on 429 errors
+- Response caching (SQLite, 7-day TTL)
+- Quality tiers: "critical" tasks use best available model,
+  "routine" tasks use fastest/cheapest
+- Token usage logging per provider per task
+- Automatic rotation when approaching limits
+- Graceful degradation (system works with ZERO API keys)
+
+═══════════════════════════════════════════════════════════════
+SECTION 5: THE DASHBOARD (OPERATIONS CENTER)
+═══════════════════════════════════════════════════════════════
+
+Build a comprehensive web dashboard (Flask + HTML/CSS/JS,
+served on port 8080) showing:
+
+OVERVIEW PANEL:
+- Total revenue (all streams, all time + this month)
+- Runway in days (current + projected)
+- Active agents count / total agents
+- System health (CPU, RAM, GPU temp, disk, uptime)
+- Founder energy/pain/fear (from last check-in)
+- Constitutional compliance status
+
+PER-STREAM PANELS (one per revenue stream):
+- Stream name, status (active/paused/killed)
+- Revenue this month / all time
+- Unit economics (cost per unit, margin, effective hourly return)
+- Kill criterion status (how close to trigger)
+- Agent(s) assigned, their current task
+- Last 7 days performance sparkline
+- Oracle prediction vs actual
+
+AGENT WORKFORCE PANEL:
+- Every agent: name, type, status, current task, PID, heartbeat
+- Tasks completed today / failed / queued
+- Error rate per agent
+- Last action taken + reasoning
+- Restart count
+
+ORACLE / SIMULATION PANEL:
+- Active predictions and their confidence scores
+- Prediction accuracy over time (calibration chart)
+- Recent scenario simulations and outcomes
+- Reflection Database: latest lessons learned
+
+GOVERNANCE PANEL:
+- Constitutional Court: recent audits (PASS/FAIL/REVIEW)
+- Approval queue (items waiting for founder)
+- Autonomy levels per stream
+- Recent decisions + reasoning
+
+HUMAN INTERFACE:
+- Daily check-in form (energy 1-5, pain 1-5, fear 1-5,
+  available minutes)
+- Approval buttons for queued items
+- One-action-per-day display
+- "Stop everything" emergency button
+- Stewardship Manual link
+
+Auto-refreshes every 60 seconds. Mobile-responsive.
+Dark theme. No external CDN dependencies (works offline).
+
+═══════════════════════════════════════════════════════════════
+SECTION 6: HUMAN ENERGY ADAPTATION
+═══════════════════════════════════════════════════════════════
+
+The system MUST adapt to the founder's condition:
+
+DAILY CHECK-IN (via dashboard or email reply):
+  Energy: 1-5 (1=bedridden, 5=peak)
+  Pain: 1-5 (1=unbearable, 5=none)
+  Fear: 1-5 (1=overwhelming, 5=none)
+  Available time: minutes
+
+SYSTEM RESPONSE:
+  Energy 1, pain high → Monitoring-only. No tasks presented.
+    Digest says: "Rest. We've got this."
+  Energy 2 → ONE tiny approval task (5 min max)
+  Energy 3 → 1-2 simple review tasks (15 min total)
+  Energy 4-5 → Strategic review, complex decisions
+  Fear 1-2 → Extra Security Buffer report in digest
+  Missed 3+ days → Maintenance mode. No guilt. "We're here
+    when you're ready." First task back is 5 minutes max.
+
+ONE-ACTION RULE: Never present a list. Always present ONE
+highest-leverage action per day.
+
+═══════════════════════════════════════════════════════════════
+SECTION 7: SELF-IMPROVEMENT LOOP
+═══════════════════════════════════════════════════════════════
+
+The machine that makes machines:
+
+1. ORACLE predicts outcomes for each stream/decision
+2. REALITY is measured (revenue, traffic, conversion, errors)
+3. REFLECTION DATABASE stores: prediction, outcome, confidence,
+   error, lesson, corrected belief, tags
+4. META-AGENT queries Reflection DB before decisions
+5. Agent configurations are adjusted based on lessons
+6. Underperforming streams are paused or killed
+7. Successful patterns are replicated to new streams
+8. NICHE SCOUT continuously discovers new opportunities
+9. New agents are spawned for validated opportunities
+10. The system's own prompts and strategies evolve
+
+This loop runs continuously. The system gets smarter over time.
+Not by magic. By measurement.
+
+═══════════════════════════════════════════════════════════════
+SECTION 8: INFRASTRUCTURE CONSTRAINTS
+═══════════════════════════════════════════════════════════════
+
+PHASE 1 (immediate): Oracle Cloud Free Tier
+  - 4 ARM cores, 24GB RAM, 200GB SSD
+  - Runs: meta-agent, all child agents, dashboard, SQLite,
+    Ollama (local fallback)
+  - Deploys content sites to Cloudflare Pages (free)
+  - Total cost: $0/month
+
+PHASE 2 (when T7910 is configured): Migrate to local
+  - T7910 becomes primary (institution-core)
+  - Oracle Cloud becomes secondary/failover
+  - N100 becomes cold standby
+  - RTX 5060 Ti runs local models (8B, 14B)
+  - 128GB RAM allows CPU-offloaded 70B models
+
+The code must work on BOTH architectures. Use environment
+variables for paths. Docker Compose for portability.
+
+FREE SERVICES TO USE:
+  - Oracle Cloud Always Free (server)
+  - Cloudflare Pages (hosting, unlimited sites)
+  - Cloudflare Workers AI (inference)
+  - GitHub (repos, unlimited)
+  - Groq API (inference)
+  - Google Gemini API (inference)
+  - Mistral API (inference)
+  - HuggingFace (inference)
+  - Pexels/Pixabay API (stock footage)
+  - edge-tts / piper (text-to-speech)
+  - YouTube Data API (video upload)
+  - Buttondown free tier (newsletter, 100 subs)
+  - Let's Encrypt (SSL)
+
+═══════════════════════════════════════════════════════════════
+SECTION 9: OUTPUT — FILE ORDER
+═══════════════════════════════════════════════════════════════
+
+Produce these files IN THIS ORDER. Each must be COMPLETE.
+
+1. setup.sh — ONE-TIME setup script. Pastes into terminal.
+   Installs everything. Creates systemd services. Starts the
+   meta-agent. Idempotent. Handles errors. Prints status.
+   After this runs, the system is LIVE and AUTONOMOUS.
+
+2. docker-compose.yml — All services orchestrated.
+
+3. config.yaml — All configuration. Sites, niches, API keys
+   (env var references), schedules, thresholds, kill criteria,
+   autonomy levels, revenue stream configs.
+
+4. common.py — Shared utilities: database, logging, config,
+   caching, API usage tracking, agent management, metrics,
+   revenue tracking, keyword management, niche management.
+
+5. providers.py — AIProviderManager with ALL free-tier
+   integrations, rotation, caching, fallback, quality tiers.
+
+6. constitutional_court.py — Pre-execution audit of every
+   action against all 10 principles + revenue constitution.
+   Output: PASS / FAIL / REVIEW_REQUIRED with reasoning.
+
+7. meta_agent.py — The brain. Spawns/manages all agents.
+   Runs the self-improvement loop. Allocates resources.
+   Generates strategic reports. Manages autonomy levels.
+   Runs health checks. Handles failover.
+
+8. agents/base.py — Base agent class with scheduling,
+   heartbeat, error handling, AI provider access.
+
+9. agents/content_site.py — STREAM 1: Full SEO content
+   engine with Hugo, Cloudflare Pages deploy, affiliate
+   integration, sitemap, RSS, JSON-LD, internal linking,
+   content bootstrap.
+
+10. agents/product_engine.py — STREAM 2: Digital product
+    generator with substantive PDF content, SVG art,
+    auto-listing on Etsy/Gumroad.
+
+11. agents/video_engine.py — STREAM 3: Faceless video
+    generator. Script → TTS → stock footage → ffmpeg
+    composition → thumbnail → YouTube upload. Also
+    vertical format for TikTok/Shorts/Reels.
+
+12. agents/newsletter.py — STREAM 4: Newsletter generation,
+    subscriber management, cross-promotion, sponsorship
+    integration.
+
+13. agents/grant_pipeline.py — STREAM 5: Grant discovery,
+    eligibility filtering, scoring, application drafting,
+    status tracking, outcome recording.
+
+14. agents/freelance_pipeline.py — STREAM 6: Opportunity
+    monitoring, skills matching, proposal drafting,
+    response tracking.
+
+15. agents/print_on_demand.py — STREAM 7: Design generation,
+    auto-listing on Redbubble/Merch by Amazon, sales tracking.
+
+16. agents/affiliate_sites.py — STREAM 8: Programmatic
+    comparison/review pages, price tracking, affiliate
+    link management.
+
+17. agents/social_media.py — STREAM 9: Multi-platform
+    content generation, scheduling, engagement tracking,
+    audience building.
+
+18. agents/micro_saas.py — STREAM 10: Scaffold for small
+    API services. Demand validation gate. Deployment
+    automation. (Stub with validation logic; full build
+    is Phase 2.)
+
+19. agents/niche_scout.py — Opportunity discovery. Market
+    research. Spawns new agents. Proposes new streams.
+
+20. agents/oracle.py — Scenario simulation. Prediction
+    generation. Calibration tracking. Reflection Database
+    queries. Forecast accuracy reporting.
+
+21. agents/safety_officer.py — Hardware monitoring. Failure
+    detection. Service restart. Failover. Disk/memory/temp
+    alerts. Incident logging.
+
+22. agents/security_buffer.py — Runway calculation. Fear
+    reduction reporting. Action prioritisation by runway
+    impact. Milestone celebration.
+
+23. dashboard.py — Full operations center as specified in
+    Section 5. All panels. Auto-refresh. Mobile-responsive.
+    Dark theme. Check-in form. Approval buttons. Emergency
+    stop.
+
+24. stewardship_manual.md — Written for someone in pain
+    who can focus for 10 minutes. Short sentences. Exact
+    commands. No jargon without explanation. "Do this.
+    Then this. Then walk away."
+
+25. README.md — Setup instructions. Architecture overview.
+    How everything connects. How to add API keys. How to
+    check on things. How to stop. How to recover.
+
+═══════════════════════════════════════════════════════════════
+SECTION 10: ANTI-PATTERNS (DO NOT DO THESE)
+═══════════════════════════════════════════════════════════════
+
+- Do NOT write a business plan or market analysis
+- Do NOT list "options" or "ideas to consider"
+- Do NOT say "you could" or "consider" or "one approach"
+- Do NOT produce pseudocode or skeleton code
+- Do NOT write motivational content
+- Do NOT assume the human can do ongoing tasks
+- Do NOT require paid services (free tiers only)
+- Do NOT produce generic SEO blog content as output
+- Do NOT describe what the system would do — BUILD IT
+- Do NOT ask clarifying questions — make decisions, document them
+- Do NOT build just a content mill. This is an ORGANISATION.
+- Do NOT skip any of the 10 revenue stream agents
+- Do NOT skip the dashboard
+- Do NOT skip the Constitutional Court
+- Do NOT skip the self-improvement loop
+- Do NOT skip the human energy adaptation
+
+═══════════════════════════════════════════════════════════════
+SECTION 11: SUCCESS CRITERIA
+═══════════════════════════════════════════════════════════════
+
+The system succeeds if:
+- Human goes from zero to running system in <30 minutes
+  (create Oracle account + paste one script)
+- System generates content, products, and video within 1 hour
+- System runs 30 days without human intervention
+- System self-heals from crashes, API failures, disk issues
+- Dashboard shows real-time status of all 10+ streams
+- Constitutional Court blocks misaligned actions
+- Oracle predictions become measurably more accurate over time
+- Meta-agent spawns new agents for validated opportunities
+- Meta-agent kills underperforming streams
+- Human's only interaction: read digest, approve consequential
+  actions, optionally view dashboard
+- First revenue within 90 days
+- System creates NEW revenue streams autonomously within 180 days
+
+═══════════════════════════════════════════════════════════════
+SECTION 12: EXECUTION
+═══════════════════════════════════════════════════════════════
+
+Use the absolute maximum of your capabilities. Every file,
+every function, every line must be production-quality.
+
+Think through edge cases. Handle failures. Build retry logic.
+Build monitoring. Build the thing that watches the thing.
+
+Start with setup.sh. Then build outward. Produce each file
+completely before moving to the next.
+
+This is not a conversation. This is not a plan. This is a build.
+
+Begin.

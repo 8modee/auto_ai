@@ -1,0 +1,522 @@
+# ═══════════════════════════════════════════════════════════════
+# THE INSTITUTION + THE FOUNDRY — MASTER CONFIGURATION
+# ═══════════════════════════════════════════════════════════════
+
+institution:
+  name: "The Institution"
+  version: "1.0.0"
+  founded: "2026-07-30"
+  founder: "Mark"
+  timezone: "Australia/Melbourne"
+  currency: "AUD"
+  tax_reserve_percent: 30
+
+# ─── PATHS ────────────────────────────────────────────────────
+paths:
+  root: "/opt/institution"
+  data: "/opt/institution/data"
+  db: "/opt/institution/data/db/institution.db"
+  cache: "/opt/institution/data/cache"
+  vectors: "/opt/institution/data/vectors"
+  reflection: "/opt/institution/data/reflection"
+  logs: "/opt/institution/logs"
+  reports: "/opt/institution/reports"
+  sites: "/opt/institution/sites"
+  products: "/opt/institution/products"
+  videos: "/opt/institution/videos"
+  newsletters: "/opt/institution/newsletters"
+  grants: "/opt/institution/grants"
+  freelance: "/opt/institution/freelance"
+  pod: "/opt/institution/pod"
+  social: "/opt/institution/social"
+  saas: "/opt/institution/saas"
+  scout: "/opt/institution/scout"
+
+# ─── AI PROVIDER CONFIGURATION ────────────────────────────────
+ai:
+  default_quality_tier: "routine"  # routine | critical
+  cache_ttl_hours: 168  # 7 days
+  max_retries: 3
+  backoff_base_seconds: 2
+  backoff_max_seconds: 300
+  timeout_seconds: 120
+
+  providers:
+    groq:
+      enabled: true
+      priority: 1
+      models:
+        critical: "llama-3.3-70b-versatile"
+        routine: "llama-3.1-8b-instant"
+      rpm_limit: 30
+      rpd_limit: 14400
+      max_tokens: 8192
+
+    gemini:
+      enabled: true
+      priority: 2
+      models:
+        critical: "gemini-2.0-flash"
+        routine: "gemini-2.0-flash"
+      rpm_limit: 15
+      rpd_limit: 1500
+      max_tokens: 8192
+
+    mistral:
+      enabled: true
+      priority: 3
+      models:
+        critical: "mistral-large-latest"
+        routine: "mistral-small-latest"
+      rpm_limit: 1
+      rpd_limit: 500
+      max_tokens: 4096
+
+    cloudflare:
+      enabled: true
+      priority: 4
+      models:
+        critical: "@cf/meta/llama-3.1-70b-instruct"
+        routine: "@cf/meta/llama-3.1-8b-instruct"
+      rpm_limit: 10
+      rpd_limit: 10000
+      max_tokens: 4096
+
+    huggingface:
+      enabled: true
+      priority: 5
+      models:
+        critical: "meta-llama/Llama-3.1-70B-Instruct"
+        routine: "meta-llama/Llama-3.1-8B-Instruct"
+      rpm_limit: 60
+      rpd_limit: 5000
+      max_tokens: 4096
+
+    openrouter:
+      enabled: true
+      priority: 6
+      models:
+        critical: "meta-llama/llama-3.1-70b-instruct"
+        routine: "meta-llama/llama-3.1-8b-instruct"
+      rpm_limit: 20
+      rpd_limit: 1000
+      max_tokens: 4096
+
+    cohere:
+      enabled: true
+      priority: 7
+      models:
+        critical: "command-r-plus"
+        routine: "command-r"
+      rpm_limit: 10
+      rpd_limit: 1000
+      max_tokens: 4096
+
+    ollama:
+      enabled: true
+      priority: 8
+      base_url: "http://localhost:11434"
+      models:
+        critical: "llama3.1:8b"
+        routine: "llama3.1:8b"
+      rpm_limit: 999
+      rpd_limit: 999999
+      max_tokens: 4096
+
+    offline:
+      enabled: true
+      priority: 9
+      max_tokens: 2048
+
+# ─── REVENUE STREAMS ──────────────────────────────────────────
+streams:
+  content_sites:
+    enabled: true
+    autonomy_level: 3
+    schedule:
+      articles_per_day: 3
+      publish_hour: 6
+    sites:
+      - name: "Home Automation Hub"
+        slug: "home-automation-hub"
+        niche: "smart home"
+        domain: ""  # Set when purchased
+        cloudflare_project: "home-automation-hub"
+        monetization:
+          - amazon_associates
+          - adsense
+        categories:
+          - "smart lighting"
+          - "home security"
+          - "voice assistants"
+          - "smart thermostats"
+          - "home networking"
+        seed_keywords:
+          - "best smart home hub 2026"
+          - "how to automate home lighting"
+          - "smart security camera comparison"
+          - "voice assistant privacy guide"
+          - "mesh wifi vs extender"
+
+      - name: "Budget Tech Living"
+        slug: "budget-tech-living"
+        niche: "budget technology"
+        domain: ""
+        cloudflare_project: "budget-tech-living"
+        monetization:
+          - amazon_associates
+          - shareasale
+        categories:
+          - "budget laptops"
+          - "free software"
+          - "refurbished tech"
+          - "diy electronics"
+          - "linux guides"
+        seed_keywords:
+          - "best budget laptop 2026"
+          - "free alternatives to adobe"
+          - "refurbished vs new laptop"
+          - "raspberry pi projects"
+          - "linux for beginners"
+
+      - name: "Pain-Free Productivity"
+        slug: "pain-free-productivity"
+        niche: "chronic pain productivity"
+        domain: ""
+        cloudflare_project: "pain-free-productivity"
+        monetization:
+          - amazon_associates
+          - adsense
+        categories:
+          - "ergonomic setups"
+          - "energy management"
+          - "assistive technology"
+          - "remote work health"
+          - "mental health tools"
+        seed_keywords:
+          - "best ergonomic chair for back pain"
+          - "productivity with chronic pain"
+          - "voice typing software comparison"
+          - "standing desk for spinal injury"
+          - "energy management techniques"
+
+    content:
+      min_word_count: 1500
+      max_word_count: 3000
+      internal_links_per_article: 5
+      bootstrap_articles: 25
+      json_ld: true
+      sitemap: true
+      rss: true
+      robots_txt: true
+
+  digital_products:
+    enabled: true
+    autonomy_level: 2
+    schedule:
+      products_per_week: 5
+      creation_day: "monday"
+    platforms:
+      - etsy
+      - gumroad
+    product_types:
+      - type: "planner"
+        pages: 10
+        price_range: [3.99, 9.99]
+        niches: ["productivity", "health tracking", "budget", "meal planning"]
+      - type: "worksheet"
+        pages: 5
+        price_range: [1.99, 4.99]
+        niches: ["goal setting", "habit tracking", "anxiety management"]
+      - type: "template"
+        pages: 3
+        price_range: [2.99, 7.99]
+        niches: ["resume", "invoice", "project plan", "content calendar"]
+      - type: "checklist"
+        pages: 3
+        price_range: [0.99, 2.99]
+        niches: ["moving", "travel", "emergency prep", "home maintenance"]
+      - type: "journal"
+        pages: 15
+        price_range: [4.99, 12.99]
+        niches: ["gratitude", "pain tracking", "dream", "creative"]
+    output_formats: ["pdf", "png"]
+    min_substantive_content_percent: 80
+
+  video_content:
+    enabled: true
+    autonomy_level: 2
+    schedule:
+      videos_per_week: 4
+      shorts_per_week: 7
+    channels:
+      - name: "Tech Explained Simply"
+        niche: "technology explainers"
+        platform: "youtube"
+        format: "landscape"
+        target_length_seconds: 480
+      - name: "Quick Tech Tips"
+        niche: "tech tips"
+        platform: "youtube"
+        format: "vertical"
+        target_length_seconds: 45
+    tts:
+      engine: "edge-tts"
+      voice: "en-AU-WilliamNeural"
+      fallback_voice: "en-US-GuyNeural"
+    footage:
+      sources: ["pexels", "pixabay"]
+      clips_per_video: 8
+      max_clip_duration_seconds: 15
+    thumbnail:
+      width: 1280
+      height: 720
+      font_size: 60
+      style: "bold_text_gradient"
+
+  newsletter:
+    enabled: true
+    autonomy_level: 2
+    schedule:
+      frequency: "weekly"
+      send_day: "wednesday"
+      send_hour: 9
+    platform: "buttondown"
+    sections:
+      - "curated_links"
+      - "original_insight"
+      - "product_spotlight"
+      - "site_updates"
+    monetization:
+      sponsorship_threshold_subs: 1000
+      affiliate_links: true
+
+  grants:
+    enabled: true
+    autonomy_level: 1
+    schedule:
+      scan_frequency: "daily"
+      scan_hour: 5
+    sources:
+      - url: "https://business.gov.au/grants-and-programs"
+        type: "federal"
+      - url: "https://www.business.vic.gov.au/grants-and-programs"
+        type: "state_vic"
+      - url: "https://www.energy.gov.au/rebates"
+        type: "energy"
+      - url: "https://www.servicesaustralia.gov.au"
+        type: "disability_support"
+    eligibility_profile:
+      location: "Australia"
+      state: "Victoria"
+      disability: true
+      small_business: true
+      tech_sector: true
+      income_threshold: 75000
+    scoring_weights:
+      value: 0.35
+      effort: 0.25
+      deadline_urgency: 0.20
+      eligibility_confidence: 0.20
+
+  freelance:
+    enabled: true
+    autonomy_level: 1
+    schedule:
+      scan_frequency: "twice_daily"
+    platforms:
+      - upwork
+      - fiverr
+      - peopleperhour
+    skills_match:
+      - "python automation"
+      - "technical writing"
+      - "homelab setup"
+      - "ai integration"
+      - "documentation"
+      - "data analysis"
+      - "linux administration"
+    min_budget: 50
+    max_proposals_per_day: 3
+    proposal_template: "professional_concise"
+
+  print_on_demand:
+    enabled: true
+    autonomy_level: 3
+    schedule:
+      designs_per_week: 10
+    platforms:
+      - redbubble
+      - merch_by_amazon
+    niches:
+      - "tech humor"
+      - "introvert culture"
+      - "chronic illness awareness"
+      - "homelab nerds"
+      - "australian wildlife"
+    design_styles:
+      - "minimalist_text"
+      - "geometric"
+      - "vintage_badge"
+    products:
+      - "t-shirt"
+      - "mug"
+      - "sticker"
+      - "phone_case"
+
+  affiliate_sites:
+    enabled: true
+    autonomy_level: 3
+    schedule:
+      pages_per_week: 5
+    sites:
+      - name: "Best Tech Under Budget"
+        slug: "best-tech-budget"
+        niche: "budget tech comparisons"
+        programs: ["amazon_associates", "shareasale"]
+    page_types:
+      - "best_x_for_y"
+      - "x_vs_y_comparison"
+      - "x_under_$z"
+      - "top_10_x_2026"
+    auto_update_prices: true
+
+  social_media:
+    enabled: true
+    autonomy_level: 3
+    schedule:
+      posts_per_day: 3
+    platforms:
+      - platform: "twitter"
+        content_types: ["tips", "threads", "hot_takes"]
+        frequency: 2
+      - platform: "linkedin"
+        content_types: ["insights", "case_studies"]
+        frequency: 1
+      - platform: "reddit"
+        content_types: ["helpful_answers", "resource_shares"]
+        frequency: 1
+        subreddits: ["homelab", "selfhosted", "productivity", "ChronicPain"]
+      - platform: "pinterest"
+        content_types: ["infographics", "product_pins"]
+        frequency: 3
+    repurpose_from: ["content_sites", "newsletter", "products"]
+
+  micro_saas:
+    enabled: false  # Pending validation
+    autonomy_level: 1
+    validation_gate:
+      min_conversations: 5
+      min_preorders: 2
+      min_interest_score: 7
+    ideas:
+      - "file conversion api"
+      - "seo audit tool"
+      - "grant deadline tracker"
+      - "energy usage monitor"
+    deployment: "oracle_cloud"
+
+  stock_content:
+    enabled: false  # Pending local GPU
+    autonomy_level: 3
+    platforms:
+      - "adobe_stock"
+      - "shutterstock"
+    generation:
+      model: "stable_diffusion"
+      styles: ["abstract", "nature", "technology", "business"]
+      images_per_day: 20
+
+# ─── META-AGENT CONFIGURATION ─────────────────────────────────
+meta_agent:
+  loop_interval_seconds: 300  # 5 minutes
+  health_check_interval_seconds: 60
+  strategic_review_interval_hours: 168  # weekly
+  resource_allocation:
+    strategy: "performance_weighted"
+    min_allocation_percent: 5
+    max_allocation_percent: 40
+    rebalance_interval_hours: 24
+  autonomy_ladder:
+    L0: "Manual — human does everything"
+    L1: "Assisted — AI drafts, human edits"
+    L2: "Recommended — AI analyses and recommends"
+    L3: "Conditional auto — AI executes low-risk after standing approval"
+    L4: "Supervised auto — AI executes within limits, human reviews after"
+    L5: "Full auto — BANNED for money/legal/public"
+  spawn_threshold:
+    min_opportunity_score: 7
+    min_validation_evidence: 3
+    max_concurrent_streams: 15
+  kill_check_interval_hours: 24
+
+# ─── HUMAN ENERGY ADAPTATION ──────────────────────────────────
+human_interface:
+  checkin_method: "dashboard"  # dashboard | email
+  one_action_rule: true
+  max_tasks_per_day:
+    energy_1: 0
+    energy_2: 1
+    energy_3: 2
+    energy_4: 4
+    energy_5: 6
+  maintenance_mode_threshold_days: 3
+  guilt_free_messaging: true
+  relapse_protocol:
+    first_task_max_minutes: 5
+    no_catchup_lists: true
+    encouragement: true
+
+# ─── DASHBOARD ────────────────────────────────────────────────
+dashboard:
+  host: "0.0.0.0"
+  port: 8080
+  auto_refresh_seconds: 60
+  theme: "dark"
+  mobile_responsive: true
+  external_cdn: false  # Works offline
+  auth:
+    enabled: true
+    session_timeout_hours: 24
+
+# ─── SAFETY & MONITORING ──────────────────────────────────────
+safety:
+  metrics_interval_seconds: 60
+  alert_thresholds:
+    cpu_percent: 90
+    ram_percent: 85
+    disk_percent: 90
+    gpu_temp_celsius: 85
+  auto_restart:
+    max_restarts_per_hour: 3
+    cooldown_seconds: 300
+  failover:
+    enabled: true
+    target: "oracle_cloud"
+    trigger: "primary_unreachable_5min"
+  backup:
+    frequency: "daily"
+    retention_days: 30
+    location: "/opt/institution/data/db/backups"
+
+# ─── ORACLE (PREDICTION ENGINE) ───────────────────────────────
+oracle:
+  prediction_horizons: [7, 30, 90]  # days
+  confidence_threshold: 60
+  calibration_window_days: 90
+  scenario_count: 3
+  reflection_query_before_decision: true
+  accuracy_target_percent: 70
+
+# ─── NOTIFICATIONS ────────────────────────────────────────────
+notifications:
+  channels:
+    - type: "email"
+      enabled: false
+      for: ["daily_digest", "critical_alerts", "approval_requests"]
+    - type: "dashboard"
+      enabled: true
+      for: ["all"]
+  digest_time: "07:00"
+  weekly_report_day: "sunday"
+  weekly_report_time: "08:00"

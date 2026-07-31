@@ -1,0 +1,2 @@
+    # Main application
+    app_py = f'''#!/usr/bin/env python3

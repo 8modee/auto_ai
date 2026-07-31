@@ -1,0 +1,169 @@
+# ═══════════════════════════════════════════════════════════════
+# THE INSTITUTION + THE FOUNDRY — DOCKER COMPOSE
+# ═══════════════════════════════════════════════════════════════
+# Optional: Use this instead of systemd for portability.
+# Works on Oracle Cloud ARM, T7910 x86, any Linux with Docker.
+# ═══════════════════════════════════════════════════════════════
+
+version: "3.8"
+
+services:
+  # ─── META-AGENT (The Brain) ─────────────────────────────────
+  meta-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: institution-meta
+    restart: unless-stopped
+    environment:
+      - INSTITUTION_ROOT=/opt/institution
+      - PYTHONPATH=/opt/institution
+      - DASHBOARD_PORT=8080
+    env_file:
+      - .env
+    volumes:
+      - institution-data:/opt/institution/data
+      - institution-sites:/opt/institution/sites
+      - institution-products:/opt/institution/products
+      - institution-videos:/opt/institution/videos
+      - institution-logs:/opt/institution/logs
+      - institution-reports:/opt/institution/reports
+      - ./config.yaml:/opt/institution/config.yaml:ro
+      - ./common.py:/opt/institution/common.py:ro
+      - ./providers.py:/opt/institution/providers.py:ro
+      - ./constitutional_court.py:/opt/institution/constitutional_court.py:ro
+      - ./meta_agent.py:/opt/institution/meta_agent.py:ro
+      - ./agents:/opt/institution/agents:ro
+    ports:
+      - "8080:8080"
+    networks:
+      - institution-net
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8080/health')"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+          cpus: "3.0"
+        reservations:
+          memory: 2G
+          cpus: "1.0"
+
+  # ─── DASHBOARD (Operations Center) ──────────────────────────
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: institution-dashboard
+    restart: unless-stopped
+    command: ["python", "dashboard.py"]
+    environment:
+      - INSTITUTION_ROOT=/opt/institution
+      - PYTHONPATH=/opt/institution
+    env_file:
+      - .env
+    volumes:
+      - institution-data:/opt/institution/data:ro
+      - institution-logs:/opt/institution/logs:ro
+      - institution-reports:/opt/institution/reports:ro
+      - ./dashboard.py:/opt/institution/dashboard.py:ro
+      - ./common.py:/opt/institution/common.py:ro
+    ports:
+      - "8081:8080"
+    networks:
+      - institution-net
+    depends_on:
+      meta-agent:
+        condition: service_healthy
+
+  # ─── SAFETY OFFICER (Always Watching) ───────────────────────
+  safety-officer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: institution-safety
+    restart: unless-stopped
+    command: ["python", "-c", "from agents.safety_officer import SafetyOfficer; SafetyOfficer().run_forever()"]
+    environment:
+      - INSTITUTION_ROOT=/opt/institution
+      - PYTHONPATH=/opt/institution
+    env_file:
+      - .env
+    volumes:
+      - institution-data:/opt/institution/data
+      - institution-logs:/opt/institution/logs
+      - ./agents:/opt/institution/agents:ro
+      - ./common.py:/opt/institution/common.py:ro
+    networks:
+      - institution-net
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "0.5"
+
+  # ─── OLLAMA (Local LLM Fallback) ────────────────────────────
+  ollama:
+    image: ollama/ollama:latest
+    container_name: institution-ollama
+    restart: unless-stopped
+    volumes:
+      - ollama-models:/root/.ollama
+    ports:
+      - "11434:11434"
+    networks:
+      - institution-net
+    deploy:
+      resources:
+        limits:
+          memory: 12G
+          cpus: "2.0"
+    # GPU passthrough (uncomment for T7910 with RTX 5060 Ti):
+    # runtime: nvidia
+    # environment:
+    #   - NVIDIA_VISIBLE_DEVICES=all
+
+  # ─── CHROMADB (Vector Store) ────────────────────────────────
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: institution-chroma
+    restart: unless-stopped
+    volumes:
+      - chroma-data:/chroma/chroma
+    ports:
+      - "8000:8000"
+    networks:
+      - institution-net
+    environment:
+      - ANONYMIZED_TELEMETRY=FALSE
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: "1.0"
+
+volumes:
+  institution-data:
+    driver: local
+  institution-sites:
+    driver: local
+  institution-products:
+    driver: local
+  institution-videos:
+    driver: local
+  institution-logs:
+    driver: local
+  institution-reports:
+    driver: local
+  ollama-models:
+    driver: local
+  chroma-data:
+    driver: local
+
+networks:
+  institution-net:
+    driver: bridge
